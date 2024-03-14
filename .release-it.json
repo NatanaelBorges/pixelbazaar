@@ -1,0 +1,51 @@
+{
+  "plugins": {
+    "@release-it/bumper": {
+      "in": ["package.json"]
+    },
+    "@release-it/conventional-changelog": {
+      "preset": "angular",
+      "infile": "CHANGELOG.md",
+      "header": "# Changelog",
+      "types": [
+        { "type": "feat", "section": "Features" },
+        { "type": "fix", "section": "Bug Fixes" },
+        { "type": "chore", "hidden": "Chore" },
+        { "type": "docs", "hidden": "Docs" },
+        { "type": "style", "hidden": "Style" },
+        { "type": "refactor", "hidden": "Refactor" },
+        { "type": "perf", "hidden": true },
+        { "type": "test", "hidden": "Test" }
+      ],
+      "commitUrlFormat": "https://github.com/NatanaelBorges/pixelbazaar/commits/{{hash}}",
+      "compareUrlFormat": "https://github.com/NatanaelBorges/pixelbazaar/compare/{{previousTag}}...{{currentTag}}"
+    }
+  },
+  "git": {
+    "requireBranch": "main",
+    "changelog": "npx auto-changelog --stdout --commit-limit false -u --template https://raw.githubusercontent.com/release-it/release-it/main/templates/changelog-compact.hbs",
+    "commit": true,
+    "commitMessage": "chore: release v${version}",
+    "tagName": "v${version}",
+    "tagAnnotation": "Release v${version}",
+    "tag": true,
+    "push": true
+  },
+  "github": {
+    "release": true,
+    "releaseName": "Release v${version}",
+    "tokenRef": "GITHUB_TOKEN",
+    "comments": {
+      "submit": false,
+      "issue": ":rocket: _This issue has been resolved in v${version}. See [${releaseName}](${releaseUrl}) for release notes._",
+      "pr": ":rocket: _This pull request is included in v${version}. See [${releaseName}](${releaseUrl}) for release notes._"
+    }
+  },
+  "hooks": {
+    "before:init": ["git pull", "npm run lint", "npm run test"],
+    "after:bump": ["npx auto-changelog -p"]
+  },
+  "npm": {
+    "publish": false
+  }
+}

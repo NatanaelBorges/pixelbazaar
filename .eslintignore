@@ -1,0 +1,13 @@
+.config
+.github
+.vscode
+.next/
+docs
+node_modules/
+coverage/
+dist/
+build/
+*.min.js
+LICENSE
+package-lock.json
+CHANGELOG.md
