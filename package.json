@@ -1,6 +1,6 @@
 {
-  "name": "Pixel Bazaar",
-  "version": "0.0.0",
+  "name": "pixel-bazaar",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
